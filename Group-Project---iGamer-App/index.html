@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>iGamer Login</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  </head>
+  
+  <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyArk9y1dlta5S5uOHekNGRJl06CoMPVdPA",
+        authDomain: "igamer-3c1e4.firebaseapp.com",
+        databaseURL: "https://igamer-3c1e4.firebaseio.com",
+        storageBucket: "igamer-3c1e4.appspot.com",
+        messagingSenderId: "321352222094"
+      };
+      firebase.initializeApp(config);
+    </script>
+    
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav">Login Page</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#About">About</a>
+                    </li>
+                    <li>
+                        <a href="#Help">Help</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="intro-header">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1>iGamer</h1>
+                        <h3>A Game Recommendation Engine</h3>
+                        <hr class="intro-divider">
+                        <div id="app">
+                          <ul class="list-inline intro-social-buttons">
+                              <li>
+                                  <button onclick="signInWithTwitter()" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></button>
+                              </li>
+                              <li>
+                                  <button onclick="signInWithGoogle()" class="btn btn-default btn-lg"><i class="fa fa-google fa-fw"></i> <span class="network-name">Google</span></buttton>
+                              </li>
+                              <li>
+                                  <button onclick="signInWithFacebook()" class="btn btn-default btn-lg"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></button>
+                              </li>
+                          </ul>
+                        </div>
+                        <div id=error_log></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    
+    <!-- Firebase Users JavaScript --> 
+    <script>
+        signInWithGoogle = function() {
+          // Sign in with Google
+          var provider = new firebase.auth.GoogleAuthProvider();
+          provider.addScope('profile');
+          provider.addScope('email');
+          return firebase.auth().signInWithPopup(provider)
+            .catch(function(error) {
+                console.log('Google sign in error', error);
+              document.getElementById('error_log').innerHTML = '<br>Google authentication error<br>Try again!';
+              
+            });
+        };
+        signInWithFacebook = function() {
+          // Sign in with Google
+          var providertwo = new firebase.auth.FacebookAuthProvider();
+          //providertwo.addScope('profile');
+          //providertwo.addScope('email');
+          return firebase.auth().signInWithPopup(providertwo)
+            .catch(function(error) {
+              console.log('Facebook sign in error', error);
+              document.getElementById('error_log').innerHTML = '<br>Facebook authentication error<br>Try again!';
+            });
+        };
+        signInWithTwitter = function() {
+          // Sign in with Google
+          var provider = new firebase.auth.TwitterAuthProvider();
+          //provider.addScope('profile');
+          //provider.addScope('email');
+          return firebase.auth().signInWithPopup(provider)
+            .catch(function(error) {
+              console.log('Twitter sign in error', error);
+              document.getElementById('error_log').innerHTML = '<br>Twitter authentication error<br>Try again!';
+            });
+        };
+        // Listen to auth state changes
+        firebase.auth().onAuthStateChanged(function(user) {
+          console.log('user', user);
+          if(user!=null)
+            window.location="survey.html"
+        });
+    </script>
+  </body>
+</html>
