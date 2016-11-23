@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+  // Initialize Firebase
+   var config = {
+    apiKey: "AIzaSyDGRs1eMllhEWQQbPyLh38j2t8_qcRSUlY",
+    authDomain: "igamer2-8c094.firebaseapp.com",
+    databaseURL: "https://igamer2-8c094.firebaseio.com",
+    storageBucket: "igamer2-8c094.appspot.com",
+    messagingSenderId: "580404183024"
+  };
+	//function to retreive an object from the gamesData
+   $(document).ready(function(){
+	$.getJSON("https://igamer2-8c094.firebaseio.com/gamesData/simulation/game1.json", 
+    function(result){
+		alert(JSON.stringify(result));
+		document.getElementById("game1").value=result.title;
+    });
+  
+  });
+    
+</script>
+</head>
+<body>
+	<div class="question-body-container">
+			<input id="game1" ,="" type="text" class="text" size="100">
+		</div>
+</body>

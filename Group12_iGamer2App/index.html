@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+  // Initialize Firebase
+   var config = {
+    apiKey: "AIzaSyDGRs1eMllhEWQQbPyLh38j2t8_qcRSUlY",
+    authDomain: "igamer2-8c094.firebaseapp.com",
+    databaseURL: "https://igamer2-8c094.firebaseio.com",
+    storageBucket: "igamer2-8c094.appspot.com",
+    messagingSenderId: "580404183024"
+  };
+  firebase.initializeApp(config);
+
+  function getAnswers() {
+  
+    var answers = {
+		questionnaire: {}
+	};
+		
+	if(document.getElementById("radio-button-0-0").checked==true)
+		answers.questionnaire.Q1 = "Female"; 
+	else if(document.getElementById("radio-button-0-1").checked==true)
+		answers.questionnaire.Q1 = "Male";
+		
+	answers.questionnaire.Q2 = document.getElementById("input-text-1").value;
+	
+	if(document.getElementById("radio-button-2-0").checked==true)
+		answers.questionnaire.Q3 = "Casual Gamer"; 
+	else if(document.getElementById("radio-button-2-1").checked==true)
+		answers.questionnaire.Q3 = "Core / Mid Core Gamer";
+	else if(document.getElementById("radio-button-2-2").checked==true)
+		answers.questionnaire.Q3 = "Hardcore Gamer";
+	
+	answers.questionnaire.Q4 = [];
+	if(document.getElementById("radio-button-3-0").checked==true)
+		answers.questionnaire.Q4.push("Console"); 
+	if(document.getElementById("radio-button-3-1").checked==true)
+		answers.questionnaire.Q4.push("PC/ Mac");
+	if(document.getElementById("radio-button-3-2").checked==true)
+		answers.questionnaire.Q4.push("SmartPhone/Tablet");
+	if(document.getElementById("radio-button-3-3").checked==true)
+		answers.questionnaire.Q4.push("Handheld Console");
+		
+	if(document.getElementById("radio-button-4-0").checked==true)
+		answers.questionnaire.Q5 = "0-1 day"; 
+	else if(document.getElementById("radio-button-4-1").checked==true)
+		answers.questionnaire.Q5 = "2-3 days";
+	else if(document.getElementById("radio-button-4-2").checked==true)
+		answers.questionnaire.Q5 = "4-5 days";
+	else if(document.getElementById("radio-button-4-3").checked==true)
+		answers.questionnaire.Q5 = "6-7 days";
+	
+    // here you need to retrieve the answers to each of the questions on the page 
+    // and return an object with the following structure:
+    return answers;
+  }
+
+	//code for existing user goes in here
+  function getCurrentlySignedInUser() {
+    return "user114";
+  }
+
+  function submitAnswers() {
+    $.ajax({
+      url: 'https://igamer2-8c094.firebaseio.com/profiles/' + getCurrentlySignedInUser() + '.json',
+      type: "PUT",
+      data: JSON.stringify(getAnswers()),
+      success: function () {
+        window.location.href='questionnaire2.html';
+      },
+      error: function(error) {
+        alert("error: " + JSON.stringify(error));
+      }
+    });
+  }
+</script>
+</head>
+<body>
+
+<div class="questionnaire-container">
+	<div class="question-container">
+		<h4 id="question-title-0" class="question-title-container">What is your gender?</h4>
+		<div class="question-body-container">
+			<div class="answer-choice">   
+				<div class="radio-button-container">    
+					<input id="radio-button-0-0" ,="" name="unique-0" type="radio" class="radio-button-input">   
+					<label class="answer-label" for="radio-button-0-0">Female</label>   
+				</div> 
+			</div>
+			<div class="answer-choice">   
+				<div class="radio-button-container">    
+					<input id="radio-button-0-1" ,="" name="unique-0" type="radio" class="radio-button-input">   
+					<label class="answer-label" for="radio-button-0-1">Male</label>   
+				</div> 
+			</div>
+		</div>
+	</div>
+	<div class="question-container">
+		<h4 id="question-title-1" class="question-title-container">How old are you?</h4>
+		<div class="question-body-container">
+			<input id="input-text-1" ,="" type="text" class="text" size="5">
+		</div>
+	</div>
+	<div class="question-container">
+		<h4 id="question-title-2" class="question-title-container">Would you consider yourself to be a ...</h4>
+			<div class="question-body-container"><div class="answer-choice">   
+				<div class="radio-button-container">    
+					<input id="radio-button-2-0" ,="" name="unique-2" type="radio" class="radio-button-input">   
+					<label class="answer-label" for="radio-button-2-0">Casual Gamer</label>   
+				</div> 
+			</div>
+			<div class="answer-choice">   
+				<div class="radio-button-container">    
+					<input id="radio-button-2-1" ,="" name="unique-2" type="radio" class="radio-button-input">   
+					<label class="answer-label" for="radio-button-2-1">Core / Mid-Core Gamer</label>   
+				</div> 
+			</div>
+			<div class="answer-choice">   
+				<div class="radio-button-container">    
+					<input id="radio-button-2-2" ,="" name="unique-2" type="radio" class="radio-button-input">   
+					<label class="answer-label" for="radio-button-2-2">Hardcare Gamer</label>   
+				</div> 
+			</div>
+		</div>
+	</div>
+	<div class="question-container">
+		<h4 id="question-title-3" class="question-title-container">Which of these platforms do you usually play games on?</h4>
+		<div class="question-body-container">
+			<div class="answer-choice">   
+				<div class="radio-button-container">    
+					<input id="radio-button-3-0" ,="" name="unique-3" type="checkbox" class="radio-button-input">   
+					<label class="answer-label" for="radio-button-3-0">Console</label>   
+				</div> 
+			</div>
+			<div class="answer-choice">   
+				<div class="radio-button-container">    
+					<input id="radio-button-3-1" ,="" name="unique-3" type="checkbox" class="radio-button-input">   
+					<label class="answer-label" for="radio-button-3-1">PC/ Mac</label>   
+				</div> 
+			</div>
+			<div class="answer-choice">   
+				<div class="radio-button-container">    
+					<input id="radio-button-3-2" ,="" name="unique-3" type="checkbox" class="radio-button-input">   
+					<label class="answer-label" for="radio-button-3-2">Smartphone/Tablet</label>   
+				</div> 
+			</div>
+			<div class="answer-choice">   
+				<div class="radio-button-container">    
+					<input id="radio-button-3-3" ,="" name="unique-3" type="checkbox" class="radio-button-input">   
+					<label class="answer-label" for="radio-button-3-3">Handheld Console</label>   
+				</div> 
+			</div>
+		</div>
+	</div>
+	<div class="question-container">
+		<h4 id="question-title-4" class="question-title-container">In a typical week, about how many days do you spend at least 30 minutes playing a video game?</h4>
+		<div class="question-body-container">
+			<div class="answer-choice">   
+				<div class="radio-button-container">    
+					<input id="radio-button-4-0" ,="" name="unique-4" type="radio" class="radio-button-input">   
+					<label class="answer-label" for="radio-button-4-0">0-1 day</label>   
+				</div> 
+			</div>
+			<div class="answer-choice">   
+				<div class="radio-button-container">    
+					<input id="radio-button-4-1" ,="" name="unique-4" type="radio" class="radio-button-input">   
+					<label class="answer-label" for="radio-button-4-1">2-3 days</label>   
+				</div> 
+			</div>
+			<div class="answer-choice">   
+				<div class="radio-button-container">    
+					<input id="radio-button-4-2" ,="" name="unique-4" type="radio" class="radio-button-input">   
+					<label class="answer-label" for="radio-button-4-2">4-5 days</label>   
+				</div> </div><div class="answer-choice">   
+				<div class="radio-button-container">    
+					<input id="radio-button-4-3" ,="" name="unique-4" type="radio" class="radio-button-input">   
+					<label class="answer-label" for="radio-button-4-3">6-7 days</label>   
+						</div> 
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<button class="submitAnswers" onclick=" submitAnswers(); ">Next</button>
+
+<div></div>
+
+</body>
+</html>
