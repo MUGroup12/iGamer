@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<style>
+#myProgress {
+  position: relative;
+  width: 35%;
+  height: 30px;
+  background-color: #ddd;
+}
+
+#myBar {
+  position: absolute;
+  width: 10%;
+  height: 100%;
+  background-color: #FF0000;
+}
+
+#label {
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+
+.button {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #FFFFFF;
+  background-color: #0000FF;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #FF0000}
+
+.button:active {
+  background-color: #FF0000;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#user{
+	border: 2px solid #a1a1a1;
+    padding: 10px 40px;
+    background: #FF0000;
+    width: 15%;
+    border-radius: 25px;
+	position: relative;
+}
+
+#genre{
+	border: 2px solid #a1a1a1;
+    padding: 10px 40px;
+    background: #FF0000;
+    width: 15%;
+    border-radius: 25px;
+	position:static;
+}
+#hours{
+	border: 2px solid #a1a1a1;
+    padding: 10px 40px;
+    background: #FF0000;
+    width: 15%;
+    border-radius: 25px;
+	position: relative;
+	left:30px;
+}
+#age{
+	border: 2px solid #a1a1a1;
+    padding: 10px 40px;
+    background: #FF0000;
+    width: 15%;
+    border-radius: 25px;
+	position: relative;
+    left: -500px;
+}
+body{
+	background-image: url("http://i.imgur.com/UjB53ue.jpg");
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+	background-size: 100% 100%;
+}
+</style>
+<center>
+	<body>
+	<img src="https://lh5.googleusercontent.com/-xrMuiGlQc6Q/VQyVqDwUCvI/AAAAAAAAAE8/NX7-A6MQlUA/w1359-h1359/logo%2BiGamer.png" width="150px" height="160px" align="left"><br>
+	&nbsp; <br>
+<form id="user">
+	Username:<br>
+	<input type="text" name="username" value="Enter a username here">
+	<br>
+	Forename:<br>
+	<input type="text" name="firstname" value="Enter first name here">
+	<br>
+	Surname:<br>
+	<input type="text" name="lastname" value="Enter surname here">
+	<br><br>
+</form>
+
+<form id="age">
+	<p>Choose an age group!</p>
+	<input type="radio" name="option" value="PG" checked> PG<br>
+	<input type="radio" name="option" value="Teen"> Teen<br>
+	<input type="radio" name="option" value="Adult"> Adult<br>
+</form>
+</center>
+<center>
+<form id="genre">
+	<p>Choose your favourite gaming genre!</p>
+	<input type="radio" name="option" value="RPG" checked> RPG<br>
+	<input type="radio" name="option" value="Sport"> Sport<br>
+	<input type="radio" name="option" value="Action"> Action<br>
+	<input type="radio" name="option" value="Adventure"> Adventure<br>
+	<input type="radio" name="option" value="Strategy"> Strategy<br>
+	<input type="radio" name="option" value="Role-playing"> Role-playing<br>
+	<input type="radio" name="option" value="Simulation"> Simulation<br>
+	<input type="radio" name="option" value="Other"> Other<br>
+</form>
+</center>
+
+
+<form id="hours">
+	<p>Choose your gaming hours per week!</p>
+	<input type="radio" name="option" value="0-4" checked> 0-4<br>
+	<input type="radio" name="option" value="5-7"> 5-7<br>
+	<input type="radio" name="option" value="7-10"> 7-10<br>
+	<input type="radio" name="option" value="10-12"> 10-12<br>
+	<input type="radio" name="option" value="12-16"> 12-16<br>
+	<input type="radio" name="option" value="16-20"> 16-20<br>
+	<input type="radio" name="option" value="20-24"> 20-24<br>
+	<input type="radio" name="option" value="24+"> 24+<br>
+	<p>Dont worry nobody can see your gaming hours...Except us! Hehehe..</p>
+</form>
+	<center>
+		<div id="myProgress">
+		<div id="myBar">
+		<div id="label">0%</div>
+		</div>
+		</div>
+	
+		<button class="button" onclick="move()">Submit</button>
+	</center>
+	
+	
+<script>
+function move() {
+  var elem = document.getElementById("myBar");
+  var width = 10;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (width >= 100) {
+      clearInterval(id);
+    } else {
+      width++;
+      elem.style.width = width + '%';
+      document.getElementById("label").innerHTML = width * 1  + '%';
+    }
+  }
+}
+</script>
+	</body>
+	
+</html>
